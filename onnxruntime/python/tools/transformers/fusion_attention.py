@@ -181,7 +181,11 @@ class FusionAttention(Fusion):
             logger.debug(f"{reshape_q.input[1]} is not initializer.")
             return self.num_heads, self.hidden_size  # Fall back to user specified value
 
-        if (not isinstance(q_shape_value, np.ndarray)) or len(q_shape_value) != 4 or (q_shape_value[2] <= 0 or q_shape_value[3] <= 0):
+        if (
+            (not isinstance(q_shape_value, np.ndarray))
+            or len(q_shape_value) != 4
+            or (q_shape_value[2] <= 0 or q_shape_value[3] <= 0)
+        ):
             logger.debug(f"q_shape_value={q_shape_value}. Expected value are like [0, 0, num_heads, head_size].")
             return self.num_heads, self.hidden_size  # Fall back to user specified value
 
@@ -1116,7 +1120,9 @@ class FusionAttention(Fusion):
                 return
             (after_k, _) = mul_k_nodes
 
-        k_nodes = self.model.match_parent_path(after_k, ["Transpose", "Reshape", "Add", "MatMul"],[0 if is_sdpa else 1, 0, 0, None])
+        k_nodes = self.model.match_parent_path(
+            after_k, ["Transpose", "Reshape", "Add", "MatMul"], [0 if is_sdpa else 1, 0, 0, None]
+        )
         if k_nodes is None:
             k_nodes = self.model.match_parent_path(
                 matmul_qk,
