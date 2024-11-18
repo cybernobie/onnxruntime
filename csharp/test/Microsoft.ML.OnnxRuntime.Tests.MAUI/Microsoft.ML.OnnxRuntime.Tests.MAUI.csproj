@@ -136,8 +136,6 @@
 		<Compile Remove="**\Windows\**\*.cs" />
 		<None Include="**\Windows\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
 		<!-- TODO: REMOVE THIS LATER THIS IS FOR DEBUGGING-->
-		<Compile Remove="TensorTests.cs" />
-		<None Include="TensorTests.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
 	</ItemGroup>
 
     <Target Name="RemoveVisualStudioTestRunner" BeforeTargets="_ComputeAppxPackagePayload">

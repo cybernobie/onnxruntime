@@ -12,14 +12,14 @@ namespace Microsoft.ML.OnnxRuntime.Tests;
 // Add a CollectionDefinition together with a ICollectionFixture
 // to ensure that setting up the Appium server only runs once
 // xUnit does not have a built-in concept of a fixture that only runs once for the whole test set.
-[CollectionDefinition("Microsoft.ML.OnnxRuntime.Tests")]
+[CollectionDefinition("UITests")]
 public sealed class UITestsCollectionDefinition : ICollectionFixture<AppiumSetup>
 {
 
 }
 
 // Add all tests to the same collection as above so that the Appium server is only setup once
-[Collection("Microsoft.ML.OnnxRuntime.Tests")]
+[Collection("UITests")]
 public class MainPageTests
 {
     protected AppiumDriver App => AppiumSetup.App;
